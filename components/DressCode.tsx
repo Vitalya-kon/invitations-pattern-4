@@ -12,7 +12,7 @@ const PALETTE = [
 ];
 
 // SVG-компонент, имитирующий мазок краски
-const BrushStroke = ({ color }) => (
+const BrushStroke = ({ color }: { color: string }) => (
     <svg
         viewBox="0 0 100 50"
         fill="none"
