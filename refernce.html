@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Андрей & Валерия — Свадебное приглашение</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/marck-script@5.0.0/index.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/cormorant-garamond@5.0.0/index.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.0/index.min.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  :root {
+    --burgundy: #7B1A2B;
+    --burgundy-dark: #5C1320;
+    --cream: #F5EDE4;
+    --cream-light: #FAF6F0;
+    --text-dark: #2C2C2C;
+    --text-muted: #6B6B6B;
+  }
+
+  body {
+    font-family: 'Cormorant Garamond', serif;
+    background: #8a8a8a;
+    color: var(--text-dark);
+    overflow-x: hidden;
+  }
+
+  .bg-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      linear-gradient(135deg, rgba(100,100,100,0.7) 0%, rgba(140,140,140,0.5) 50%, rgba(80,80,80,0.7) 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg-mountains {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: 
+      linear-gradient(to bottom, transparent 40%, rgba(60,70,80,0.3) 60%, rgba(40,50,60,0.5) 100%);
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .site-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    min-height: 100vh;
+  }
+
+  .site-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    text-align: center;
+    padding: 12px 20px;
+    background: rgba(123, 26, 43, 0.95);
+    backdrop-filter: blur(10px);
+  }
+
+  .site-header a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+
+  .column {
+    background: var(--cream-light);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    margin-top: 50px;
+  }
+
+  /* LEFT COLUMN */
+  .left-col .hero-section {
+    padding: 50px 40px 30px;
+    text-align: center;
+    position: relative;
+    background: var(--cream-light);
+  }
+
+  .hero-title {
+    font-family: 'Marck Script', cursive;
+    font-size: 52px;
+    color: var(--burgundy);
+    line-height: 1.1;
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-title .ampersand {
+    font-size: 36px;
+    color: var(--burgundy);
+    display: block;
+    margin: -5px 0;
+  }
+
+  .hero-yes {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-family: 'Marck Script', cursive;
+    font-size: 28px;
+    color: #c9a96e;
+    transform: rotate(-15deg);
+    opacity: 0.7;
+  }
+
+  .hero-subtitle {
+    font-family: 'Marck Script', cursive;
+    font-size: 22px;
+    color: var(--text-dark);
+    margin-top: 10px;
+    transform: rotate(-3deg);
+  }
+
+  .hero-photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 20px 30px;
+    position: relative;
+  }
+
+  .hero-photos::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 20px; right: 20px;
+    height: 3px;
+    background: var(--burgundy);
+    border-radius: 2px;
+  }
+
+  .hero-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  }
+
+  .intro-text {
+    padding: 30px 40px;
+    text-align: center;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  .month-title {
+    font-family: 'Marck Script', cursive;
+    font-size: 36px;
+    color: var(--burgundy);
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .date-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 0 40px 30px;
+    align-items: center;
+  }
+
+  .date-box {
+    width: 42px;
+    height: 42px;
+    border: 2px solid var(--burgundy);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--burgundy);
+    background: white;
+  }
+
+  .date-box.active {
+    background: var(--burgundy);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    position: relative;
+  }
+
+  .date-box.active::before {
+    content: '';
+    position: absolute;
+    top: -6px; left: 50%;
+    transform: translateX(-50%);
+    width: 0; height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 10px solid var(--burgundy);
+  }
+
+  /* TIMELINE */
+  .timeline-section {
+    padding: 20px 40px 40px;
+    position: relative;
+  }
+
+  .timeline-svg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .timeline-svg path {
+    fill: none;
+    stroke: var(--burgundy);
+    stroke-width: 2;
+    stroke-dasharray: 8 4;
+  }
+
+  .timeline-item {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 40px;
+    padding-left: 20px;
+  }
+
+  .timeline-item:nth-child(even) {
+    text-align: right;
+    padding-left: 0;
+    padding-right: 20px;
+  }
+
+  .timeline-time {
+    font-family: 'Marck Script', cursive;
+    font-size: 28px;
+    color: var(--burgundy);
+  }
+
+  .timeline-title {
+    font-family: 'Marck Script', cursive;
+    font-size: 26px;
+    color: var(--text-dark);
+    margin: 2px 0 8px;
+  }
+
+  .timeline-desc {
+    font-size: 15px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    max-width: 220px;
+  }
+
+  .timeline-item:nth-child(even) .timeline-desc {
+    margin-left: auto;
+  }
+
+  /* LOCATION CARD */
+  .location-card {
+    background: var(--burgundy);
+    color: white;
+    padding: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .location-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.05) 0%, transparent 70%);
+  }
+
+  .location-title {
+    font-family: 'Marck Script', cursive;
+    font-size: 38px;
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .location-address {
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.9;
+    position: relative;
+    margin-bottom: 25px;
+  }
+
+  .btn-map {
+    display: inline-block;
+    padding: 12px 35px;
+    border: 2px solid white;
+    color: white;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    transition: all 0.3s;
+    position: relative;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  .btn-map:hover {
+    background: white;
+    color: var(--burgundy);
+  }
+
+  /* RIGHT COLUMN */
+  .right-col .top-photo {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(100%);
+  }
+
+  .right-col .invite-text-section {
+    background: var(--burgundy);
+    color: white;
+    padding: 40px 35px;
+    text-align: center;
+    position: relative;
+  }
+
+  .invite-text-section p {
+    font-size: 15px;
+    line-height: 1.7;
+    opacity: 0.9;
+    margin-bottom: 25px;
+  }
+
+  .invite-cursive {
+    font-family: 'Marck Script', cursive;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+
+  .heart-icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto 20px;
+    position: relative;
+  }
+
+  .heart-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: white;
+    animation: heartbeat 1.5s ease-in-out infinite;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+
+  .wave-line {
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    background: var(--burgundy);
+  }
+
+  .wave-line svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .love-section {
+    padding: 30px;
+    text-align: center;
+  }
+
+  .love-quote {
+    font-family: 'Marck Script', cursive;
+    font-size: 20px;
+    color: var(--burgundy);
+    margin-bottom: 15px;
+    transform: rotate(-2deg);
+  }
+
+  .love-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+  }
+
+  .countdown-section {
+    text-align: center;
+    padding: 20px 30px 40px;
+  }
+
+  .countdown-label {
+    font-family: 'Marck Script', cursive;
+    font-size: 28px;
+    color: var(--burgundy);
+    margin-bottom: 5px;
+  }
+
+  .countdown-sublabel {
+    font-size: 16px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .countdown-block {
+    text-align: center;
+  }
+
+  .countdown-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1;
+    min-width: 50px;
+  }
+
+  .countdown-unit {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: lowercase;
+    margin-top: 4px;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .countdown-separator {
+    font-size: 28px;
+    color: var(--burgundy);
+    font-weight: 700;
+    line-height: 1;
+    padding-top: 2px;
+  }
+
+  .info-section {
+    background: var(--burgundy);
+    color: white;
+    padding: 35px;
+  }
+
+  .info-title {
+    font-family: 'Marck Script', cursive;
+    font-size: 30px;
+    margin-bottom: 12px;
+  }
+
+  .info-text {
+    font-size: 14px;
+    line-height: 1.7;
+    opacity: 0.9;
+  }
+
+  .info-section + .info-section {
+    background: var(--cream-light);
+    color: var(--text-dark);
+  }
+
+  .info-section + .info-section .info-title {
+    color: var(--burgundy);
+  }
+
+  .info-section + .info-section .info-text {
+    color: var(--text-muted);
+  }
+
+  .btn-join {
+    display: block;
+    width: calc(100% - 60px);
+    margin: 25px 30px;
+    padding: 14px;
+    border: 2px solid var(--burgundy);
+    background: transparent;
+    color: var(--burgundy);
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: center;
+  }
+
+  .btn-join:hover {
+    background: var(--burgundy);
+    color: white;
+  }
+
+  /* Animations */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .site-wrapper {
+      grid-template-columns: 1fr;
+      padding: 10px;
+      gap: 20px;
+    }
+    .column {
+      margin-top: 50px;
+    }
+    .hero-title {
+      font-size: 40px;
+    }
+    .hero-photos {
+      padding: 15px 20px;
+    }
+    .intro-text, .timeline-section {
+      padding-left: 25px;
+      padding-right: 25px;
+    }
+    .location-card {
+      padding: 30px 25px;
+    }
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--cream); }
+  ::-webkit-scrollbar-thumb { background: var(--burgundy); border-radius: 4px; }
+
+  .floating-hearts {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .floating-heart {
+    position: absolute;
+    font-size: 20px;
+    opacity: 0.1;
+    animation: floatUp 15s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.1; }
+    90% { opacity: 0.1; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-overlay"></div>
+<div class="bg-mountains"></div>
+
+<div class="floating-hearts" id="floatingHearts"></div>
+
+<header class="site-header">
+  <a href="#">MARYINVITE.RU</a>
+</header>
+
+<div class="site-wrapper">
+  <!-- LEFT COLUMN -->
+  <div class="column left-col">
+    <div class="hero-section fade-in">
+      <div class="hero-yes">yes</div>
+      <div class="hero-title">
+        Андрей
+        <span class="ampersand">&</span>
+        Валерия
+      </div>
+      <div class="hero-subtitle">Остаетесь, мы женимся!</div>
+    </div>
+
+    <div class="hero-photos fade-in">
+      <img src="https://images.unsplash.com/photo-1519741497674-611481863552?w=400&h=300&fit=crop" alt="Фото пары 1" class="hero-photo" style="filter: grayscale(80%);">
+      <img src="https://images.unsplash.com/photo-1529634597503-139d3726fed5?w=400&h=300&fit=crop" alt="Фото пары 2" class="hero-photo" style="filter: grayscale(30%);">
+    </div>
+
+    <div class="intro-text fade-in">
+      И в этот прекрасный день мы хотим вместе с Вами разделить яркие мгновения и искренние улыбки!
+    </div>
+
+    <div class="month-title fade-in">наш август</div>
+
+    <div class="date-selector fade-in">
+      <div class="date-box">6</div>
+      <div class="date-box">7</div>
+      <div class="date-box active">8</div>
+      <div class="date-box">9</div>
+      <div class="date-box">10</div>
+    </div>
+
+    <div class="timeline-section fade-in">
+      <svg class="timeline-svg" viewBox="0 0 400 500" preserveAspectRatio="none">
+        <path d="M 200 0 C 100 80, 300 120, 200 200 C 100 280, 300 320, 200 400 C 150 450, 250 480, 200 500" />
+      </svg>
+
+      <div class="timeline-item">
+        <div class="timeline-time">14:30</div>
+        <div class="timeline-title">Сбор гостей</div>
+        <div class="timeline-desc">Время пролетит незаметно за играми и общением с другими гостями.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">15:00</div>
+        <div class="timeline-title">Церемония</div>
+        <div class="timeline-desc">На всякий случай приготовьте носовые платочки для трогательного момента.</div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-time">17:00</div>
+        <div class="timeline-title">Начало банкета</div>
+        <div class="timeline-desc">Вкусные блюда и веселая программа от нашего крутого ведущего.</div>
+      </div>
+    </div>
+
+    <div class="location-card fade-in">
+      <div class="location-title">Ждем вас</div>
+      <div class="location-address">
+        Ресторан "Аргунь" г.<br>
+        Краснокаменск, Проспект<br>
+        Ветеранов, 3
+      </div>
+      <button class="btn-map" onclick="openMap()">Перейти на карту</button>
+    </div>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="column right-col">
+    <img src="https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&h=400&fit=crop" alt="Фото пары" class="top-photo fade-in">
+
+    <div class="invite-text-section fade-in">
+      <p>Вы не просто так получили это приглашение! В особенный для нас день мы очень хотим, чтобы вы были рядом!</p>
+      <div class="invite-cursive">Ждём вас с нетерпением</div>
+      <div class="heart-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      </div>
+      <div style="font-size: 14px; letter-spacing: 2px; text-transform: uppercase; opacity: 0.85;">С любовью,<br>АНДРЕЙ И ВАЛЕРИЯ</div>
+    </div>
+
+    <div class="wave-line">
+      <svg viewBox="0 0 1200 30" preserveAspectRatio="none">
+        <path d="M0,15 Q150,0 300,15 T600,15 T900,15 T1200,15 L1200,30 L0,30 Z" fill="#F5EDE4"/>
+      </svg>
+    </div>
+
+    <div class="love-section fade-in">
+      <div class="love-quote">Любовь смотрит - не глазами, а сердцем</div>
+      <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500&h=400&fit=crop" alt="Фото пары ночью" class="love-photo">
+    </div>
+
+    <div class="countdown-section fade-in">
+      <div class="countdown-label">мы скажем "да"</div>
+      <div class="countdown-sublabel">через...</div>
+      <div class="countdown-timer" id="countdownTimer">
+        <div class="countdown-block">
+          <div class="countdown-number" id="days">152</div>
+          <div class="countdown-unit">дней</div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-block">
+          <div class="countdown-number" id="hours">5</div>
+          <div class="countdown-unit">часов</div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-block">
+          <div class="countdown-number" id="minutes">18</div>
+          <div class="countdown-unit">минут</div>
+        </div>
+        <div class="countdown-separator">:</div>
+        <div class="countdown-block">
+          <div class="countdown-number" id="seconds">18</div>
+          <div class="countdown-unit">секунд</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section fade-in">
+      <div class="info-title">Пожелания</div>
+      <div class="info-text">Мы очень ценим Вашу заботу, внимание и будем рады любому подарку! И не важно, в какой конверт Вы его упакуете :)</div>
+    </div>
+
+    <div class="info-section fade-in">
+      <div class="info-title">Друзья</div>
+      <div class="info-text">Мы создали телеграм-группу нашего праздника, где можно будет узнать дополнительную информацию, а также поделиться фотографиями и видео в день свадьбы и после.</div>
+    </div>
+
+    <button class="btn-join" onclick="joinGroup()">Вступить</button>
+  </div>
+</div>
+
+<script>
+  // Countdown timer
+  const weddingDate = new Date();
+  weddingDate.setDate(weddingDate.getDate() + 152);
+  weddingDate.setHours(weddingDate.getHours() + 5);
+  weddingDate.setMinutes(weddingDate.getMinutes() + 18);
+  weddingDate.setSeconds(weddingDate.getSeconds() + 18);
+
+  function updateCountdown() {
+    const now = new Date();
+    const diff = weddingDate - now;
+
+    if (diff <= 0) {
+      document.getElementById('days').textContent = '0';
+      document.getElementById('hours').textContent = '0';
+      document.getElementById('minutes').textContent = '0';
+      document.getElementById('seconds').textContent = '0';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours;
+    document.getElementById('minutes').textContent = minutes;
+    document.getElementById('seconds').textContent = seconds;
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // Fade-in animation on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Floating hearts
+  function createFloatingHearts() {
+    const container = document.getElementById('floatingHearts');
+    for (let i = 0; i < 8; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = '♥';
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDelay = Math.random() * 15 + 's';
+      heart.style.animationDuration = (10 + Math.random() * 10) + 's';
+      heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+      container.appendChild(heart);
+    }
+  }
+  createFloatingHearts();
+
+  // Button handlers
+  function openMap() {
+    window.open('https://maps.google.com/?q=Краснокаменск+Проспект+Ветеранов+3', '_blank');
+  }
+
+  function joinGroup() {
+    alert('Добро пожаловать в нашу телеграм-группу! 🎉');
+  }
+
+  // Date selector interaction
+  document.querySelectorAll('.date-box').forEach(box => {
+    box.addEventListener('click', function() {
+      document.querySelectorAll('.date-box').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
